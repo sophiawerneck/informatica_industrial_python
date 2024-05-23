@@ -1,5 +1,5 @@
 import socket
-import threading
+import threading # Para transformar o servidor em multithreading
 
 
 class Servidor():
@@ -52,18 +52,18 @@ class Servidor():
                 return
 
 
-class ServidorMT(Servidor):
+class ServidorMT(Servidor): # Herança, classe criada para transformar o servidor em multithreading, deriva da classe Servidor
     """
     Classe Servidor MultiThread - API Socket
     """
-    def __init__(self, host, port):
+    def __init__(self, host, port): #utiliza o construtor da classe base 
         """
         Construtor da classe ServidorMT
         """
-        super().__init__(host,port)
-        self.__threadPool = {}
+        super().__init__(host,port) # super para invocar o construtor da classe servidor
+        self.__threadPool = {} #conjunto de threads(uma para cada cliente): é um dicionário que armazena as múltiplas linhas de execução
     
-    def start(self):
+    def start(self): #diferente da classe base
         """
         Método que inicializa a execução do servidor
         """
@@ -71,12 +71,15 @@ class ServidorMT(Servidor):
         endpoint = (self._host,self._port)
         try:
             self.__tcp.bind(endpoint)
-            self.__tcp.listen(1)
+            self.__tcp.listen(1) #até aqui é igual a classe base
             print("Servidor iniciado em ",self._host,": ", self._port)
-            while True:
-                con, client = self.__tcp.accept()
-                self.__threadPool[client] = threading.Thread(target=self._service,args=(con,client))
-                self.__threadPool[client].start()
-
+            while True: 
+                con, client = self.__tcp.accept() #criar outra linha de execução para executar
+                self.__threadPool[client] = threading.Thread(target=self._service,args=(con,client)) #target: função e args:argumentos da funcao(conexão e cliente) / cria um objeto da classe Thread/ cada linha de execução nova executa o método service
+                self.__threadPool[client].start() #executa a Thread, o start não é bloqueante, volta para o accept estando apto a pegar outro cliente
+                # sem o threading usa o self.__service(con, client)
         except Exception as e:
             print("Erro ao inicializar o servidor",e.args)
+
+# Para múltiplos clientes utiliza o multi-thread: na primeira linha de execução está executando o método start do servidor, na segunda linha 
+# executa o primeiro cliente, na próxima executa o segundo cliente em paralelo
