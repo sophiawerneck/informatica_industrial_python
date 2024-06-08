@@ -17,7 +17,8 @@ class ModbusPersistencia(object):
         self._cliente = ModbusClient(host=server_ip, port=porta)
         self._scan_time = 1
         self._tags_addrs = tags_addrs
-        self._dbclient = DBHandler('data\data.db',self._tags_addrs.keys(),'modbusData')
+        #self._dbclient = DBHandler('data\data.db',self._tags_addrs.keys(),'modbusData')
+        self._dbclient = DBHandler('data.db',self._tags_addrs.keys(),'modbusData')
         self._threads = []
 
     def guardar_dados(self):
