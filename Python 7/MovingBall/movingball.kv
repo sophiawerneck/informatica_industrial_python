@@ -1,36 +1,38 @@
 #:kivy 1.11.1
 <MyWidget>:
     orientation: 'vertical'
-    RelativeLayout:
-        id: valid_region
+    RelativeLayout: # 1° widget filho / Permite uma flexibilidade maior no posicionamento dos widgets filhos
+        id: valid_region # região válida onde a bola pode navegar
         Widget:
-            id: bola
-            size_hint: None,None
-            size: 50,50
-            canvas:
+            id: bola # Não definu a posição dela, então como padrão está em 0,0
+            size_hint: None,None # Pq não quer se basear no tamanho do widget pai
+            size: 50,50 # Tamanho absoluto de 50 para 50 pixels, para que independentemente da tela tenha uma bola redonda
+            canvas: # tela onde pode criar oq quiser dentro do widget
                 Color:
-                    rgba: 0,0,1,1
+                    rgba: 0,0,1,1 # último 1 é a saturação
                 Ellipse:
-                    pos:self.pos
-                    size:self.size
-    BoxLayout:
+                    pos:self.pos # self: próprio componente que no caso é o widget de bola 
+                    size:self.size # Tamanho da elipse 50,50
+    BoxLayout: # 2° widget filho, define 2 propriedades: horizontal e a largura e altura
         orientation:'horizontal'
-        size_hint: (1,0.1)
+        size_hint: (1,0.1) # size_hint -> valor percentual entre o tamanho do widget filho(BoxLayout) e do widget pai(MyWidget)
         Button:
             id: bt_mover
             text: "Mover"
             background_color: [1,0,0,1]
-            on_release: root.command()
+            on_release: root.command() # refere a Classe raiz(MyWidget)
         BoxLayout:
             orientation:'vertical'
             Label:
-                size_hint: (1,0.5)
+                size_hint: (1,0.5) # Para diminuir o tamanho
                 text: 'Velocidade'
-            Slider:
+            Slider: #Para poder escolher a velocidade da bola
                 id: slider_vel
-                min: 1
-                max: 30
-                on_touch_move: 
-                    root._vel[0] = slider_vel.value*root._vel[0]/abs(root._vel[0])
+                min: 1 # velocidade mínima
+                max: 30 # velocidade máxima
+                on_touch_move: # Toda vez que movimenta o slider invoca determinado método
+                    root._vel[0] = slider_vel.value*root._vel[0]/abs(root._vel[0]) # root._vel[0]/abs(root._vel[0] = x/|x| = 1 ou -1 para descobrir o sinal para frente ou para trás
                     root._vel[1] = slider_vel.value*root._vel[1]/abs(root._vel[1])
 
+# self, root?? e app
+# foto do dia 29/05/24
