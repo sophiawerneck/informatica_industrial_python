@@ -1,20 +1,27 @@
 #:kivy 1.11.1
+# Descrição da interface gráfica
 <MyWidget>:
-    orientation: 'horizontal'
-    Button:
-        id: btn
+    orientation: 'horizontal' # Alterando o atributo orientation, ordenar os widgets na horizontal, padrão é horizontal
+    Button: # Tem 3 componentes, só olhar a indetação
+        id: btn # id: referencia aos componentes específicos
         text: 'Incrementar'
-        background_color: [1,0,0,1]
-        on_press: root.changelb()
-    Label:
+        background_color: [1,0,0,1] # rgb e saturação, escala rgb da cor x
+        on_press: root.changelb()  # MyWidget vai ter um método changelb()
+    Label: 
         id: lb
         text: '0'
-    BoxLayout:
+    BoxLayout: # Pode colocar um container dentro do outro
         id: bxa
         Button:
             id: bt_limpar
             text: 'Limpar'
-            on_press:  lb.text = '0'
+            on_press:  lb.text = '0' # associa a um código em python, pega o texto do button e torna ele 0 self.text = altera o texto do botão e não do label
         Label:
             id:lb_2
             text: 'Label2'
+
+# app -> se refere ao opjeto app da aplicação / refere-se à instância do aplicativo em execução / app.changelb(): refere-se ao aplicativo BasicApp
+# self -> se refere ao próprio objeto / widget atual, definido um nível de indentação antes / self.changelb(): refere-se a classe Button
+# root -> objeto raiz do kv / widget base da regra definida entre <> / root.changelb(): refere-se a <MyWidget>
+
+# app.root
