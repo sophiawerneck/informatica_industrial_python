@@ -5,11 +5,12 @@ for x in lista:
     print(x)
 
 lista.append("Soares")  #adicionar nova variável na lista, coloca o soares no 7 elemento(índice 6)
-lista[0] = 55 
+lista[0] = 55
+
 
 for x in range(0,len(lista)): #imita o for do c++, vai de 0 até o tamanho da lista(de 0 até 7, mas o 7 n é incluído)
     if x == 2:
-        continue
+        continue # break
     print(lista[x])
 
 #Dicionário  
@@ -39,7 +40,7 @@ for i in range(0,10):
     pilha.append(i)
 
 for i in range(0,10):
-    print(pilha.pop(),end=" ")
+    print(pilha.pop(), end=" ")
 
 print()
 
@@ -52,3 +53,11 @@ for i in range(0,10):
 
 for i in range(0,10):
     print(fila.popleft(),end=" ")  #remove no início
+
+
+l = [10]  # variável l associada ao objeto lista
+l.append(5)  # modifica a lista, a lista é mutável # l = [10,5]
+h = l
+h.append(20) #h = [10,5,20] e l também 
+print(h)
+print(l)
