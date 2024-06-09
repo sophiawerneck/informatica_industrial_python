@@ -31,3 +31,5 @@ if __name__ == "__main__":  # Não são executadas quando se o utiliza o import
         print(divisao(float(sys.argv[1]), float(sys.argv[2])))
     else:
         print("Operação inválida")
+# Digitar isso no terminal para fazer a conta: python minhalib.py 3 4 +
+# Verificar se está no cmainho certo: C:\Users\werne\OneDrive\Documentos\informatica_ind\InformaticaIndustrialUFJF-main\Python\Python 2\Modulos
